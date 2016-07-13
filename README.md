@@ -1,11 +1,11 @@
-# nat creator aws connector 
+# nat deleter aws connector 
 
-Service to create aws nats, it responds to *nat.create.aws* and will respond with *nat.create.aws.done* or *nat.create.aws.error*
+Service to delete aws nats, it responds to *nat.delete.aws* and will respond with *nat.delete.aws.done* or *nat.delete.aws.error*
 
 ## Build status
 
-* master: [![CircleCI](https://circleci.com/gh/r3labs/nat-creator-aws-connector/tree/master.svg?style=svg)](https://circleci.com/gh/r3labs/nat-creator-aws-connector/tree/master)
-* develop: [![CircleCI](https://circleci.com/gh/ErnestIO/nat-creator-aws-connector/tree/develop.svg?style=svg)](https://circleci.com/gh/r3labs/nat-creator-aws-connector/tree/develop)
+* master: [![CircleCI](https://circleci.com/gh/r3labs/nat-deleter-aws-connector/tree/master.svg?style=svg)](https://circleci.com/gh/r3labs/nat-deleter-aws-connector/tree/master)
+* develop: [![CircleCI](https://circleci.com/gh/ErnestIO/nat-deleter-aws-connector/tree/develop.svg?style=svg)](https://circleci.com/gh/r3labs/nat-deleter-aws-connector/tree/develop)
 
 ## Installation
 
@@ -41,4 +41,3 @@ Code and documentation copyright since 2015 r3labs.io authors.
 
 Code released under
 [the Mozilla Public License Version 2.0](LICENSE).
-
