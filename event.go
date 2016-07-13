@@ -15,9 +15,10 @@ var (
 	ErrDatacenterRegionInvalid      = errors.New("Datacenter Region invalid")
 	ErrDatacenterCredentialsInvalid = errors.New("Datacenter credentials invalid")
 	ErrNetworkIDInvalid             = errors.New("Network id invalid")
+	ErrNatGatewayIDInvalid          = errors.New("Nat Gateway aws id invalid")
 )
 
-// Event stores the network create data
+// Event stores the nat gateway data
 type Event struct {
 	ID                     string `json:"id"`
 	DatacenterVPCID        string `json:"datacenter_vpc_id"`
@@ -49,7 +50,20 @@ func (ev *Event) Validate() error {
 		return ErrNetworkIDInvalid
 	}
 
+	if ev.NatGatewayAWSID == "" {
+		return ErrNatGatewayIDInvalid
+	}
+
 	return nil
+}
+
+// Process the raw event
+func (ev *Event) Process(data []byte) error {
+	err := json.Unmarshal(data, &ev)
+	if err != nil {
+		nc.Publish("nat.delete.aws.error", data)
+	}
+	return err
 }
 
 // Error the request
