@@ -6,7 +6,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -35,8 +34,8 @@ func eventHandler(m *nats.Msg) {
 		return
 	}
 
-	if n.Valid() == false {
-		n.Error(errors.New("Network is invalid"))
+	if err = n.Validate(); err != nil {
+		n.Error(err)
 		return
 	}
 
