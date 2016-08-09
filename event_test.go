@@ -13,7 +13,9 @@ import (
 	"testing"
 	"time"
 
+	ecc "github.com/ernestio/ernest-config-client"
 	"github.com/nats-io/nats"
+
 	. "github.com/smartystreets/goconvey/convey"
 )
 
@@ -43,11 +45,7 @@ func waitMsg(ch chan *nats.Msg) (*nats.Msg, error) {
 func testSetup() (chan *nats.Msg, chan *nats.Msg) {
 	doneChan := make(chan *nats.Msg, 10)
 	errChan := make(chan *nats.Msg, 10)
-
-	nc, natsErr = nats.Connect(nats.DefaultURL)
-	if natsErr != nil {
-		panic("Could not connect to nats")
-	}
+	nc = ecc.NewConfig(os.Getenv("NATS_URI")).Nats()
 
 	nc.ChanSubscribe("nat.delete.aws.done", doneChan)
 	nc.ChanSubscribe("nat.delete.aws.error", errChan)
