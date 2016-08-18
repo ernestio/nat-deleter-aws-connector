@@ -5,9 +5,11 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"runtime"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -43,6 +45,31 @@ func eventHandler(m *nats.Msg) {
 	n.Complete()
 }
 
+func natGatewayByID(svc *ec2.EC2, id string) (*ec2.NatGateway, error) {
+	req := ec2.DescribeNatGatewaysInput{
+		NatGatewayIds: []*string{aws.String(id)},
+	}
+	resp, err := svc.DescribeNatGateways(&req)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(resp.NatGateways) != 1 {
+		return nil, errors.New("Could not find nat gateway")
+	}
+
+	return resp.NatGateways[0], nil
+}
+
+func isNatGatewayDeleted(svc *ec2.EC2, id string) bool {
+	gw, _ := natGatewayByID(svc, id)
+	if *gw.State == ec2.NatGatewayStateDeleted {
+		return true
+	}
+
+	return false
+}
+
 func deleteNat(ev *Event) error {
 	creds := credentials.NewStaticCredentials(ev.DatacenterAccessKey, ev.DatacenterAccessToken, "")
 	svc := ec2.New(session.New(), &aws.Config{
@@ -57,6 +84,10 @@ func deleteNat(ev *Event) error {
 	_, err := svc.DeleteNatGateway(&req)
 	if err != nil {
 		return err
+	}
+
+	for isNatGatewayDeleted(svc, ev.NatGatewayAWSID) {
+		time.Sleep(time.Second * 3)
 	}
 
 	return nil
