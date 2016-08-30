@@ -192,22 +192,6 @@ func TestEvent(t *testing.T) {
 			})
 		})
 
-		Convey("With no network id", func() {
-			testEventInvalid := testEvent
-			testEventInvalid.NetworkAWSID = ""
-			invalid, _ := json.Marshal(testEventInvalid)
-
-			Convey("When validating the event", func() {
-				var e Event
-				e.Process(invalid)
-				err := e.Validate()
-				Convey("It should error", func() {
-					So(err, ShouldNotBeNil)
-					So(err.Error(), ShouldEqual, "Network id invalid")
-				})
-			})
-		})
-
 		Convey("With no nat aws id", func() {
 			testEventInvalid := testEvent
 			testEventInvalid.NatGatewayAWSID = ""
