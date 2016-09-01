@@ -86,7 +86,7 @@ func deleteNat(ev *Event) error {
 		return err
 	}
 
-	for isNatGatewayDeleted(svc, ev.NatGatewayAWSID) {
+	for isNatGatewayDeleted(svc, ev.NatGatewayAWSID) == false {
 		time.Sleep(time.Second * 3)
 	}
 
