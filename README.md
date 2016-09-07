@@ -4,8 +4,8 @@ Service to delete aws nats, it responds to *nat.delete.aws* and will respond wit
 
 ## Build status
 
-* master: [![CircleCI](https://circleci.com/gh/ErnestIO/nat-deleter-aws-connector/tree/master.svg?style=svg)](https://circleci.com/gh/ErnestIO/nat-deleter-aws-connector/tree/master)
-* develop: [![CircleCI](https://circleci.com/gh/ErnestIO/nat-deleter-aws-connector/tree/develop.svg?style=svg)](https://circleci.com/gh/ErnestIO/nat-deleter-aws-connector/tree/develop)
+* master: [![CircleCI](https://circleci.com/gh/ernestio/nat-deleter-aws-connector/tree/master.svg?style=svg)](https://circleci.com/gh/ernestio/nat-deleter-aws-connector/tree/master)
+* develop: [![CircleCI](https://circleci.com/gh/ernestio/nat-deleter-aws-connector/tree/develop.svg?style=svg)](https://circleci.com/gh/ernestio/nat-deleter-aws-connector/tree/develop)
 
 ## Installation
 
