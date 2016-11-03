@@ -23,10 +23,10 @@ type Event struct {
 	UUID                   string `json:"_uuid"`
 	BatchID                string `json:"_batch_id"`
 	ProviderType           string `json:"_type"`
-	VPCID        string `json:"vpc_id"`
+	VPCID                  string `json:"vpc_id"`
 	DatacenterRegion       string `json:"datacenter_region"`
-	DatacenterAccessKey    string `json:"datacenter_access_key"`
-	DatacenterAccessToken  string `json:"datacenter_access_token"`
+	DatacenterAccessKey    string `json:"datacenter_secret"`
+	DatacenterAccessToken  string `json:"datacenter_token"`
 	NetworkAWSID           string `json:"network_aws_id"`
 	NatGatewayAWSID        string `json:"nat_gateway_aws_id"`
 	NatGatewayAllocationID string `json:"nat_gateway_allocation_id"`
