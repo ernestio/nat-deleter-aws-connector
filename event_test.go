@@ -24,7 +24,7 @@ var (
 		UUID:                  "test",
 		BatchID:               "test",
 		ProviderType:          "aws",
-		VPCID:       "vpc-0000000",
+		VPCID:                 "vpc-0000000",
 		DatacenterRegion:      "eu-west-1",
 		DatacenterAccessKey:   "key",
 		DatacenterAccessToken: "token",
@@ -118,7 +118,7 @@ func TestEvent(t *testing.T) {
 				Convey("It should produce a nat.delete.aws.error event", func() {
 					msg, timeout := waitMsg(errored)
 					So(msg, ShouldNotBeNil)
-					So(string(msg.Data), ShouldContainSubstring, `"error":"error"`)
+					So(string(msg.Data), ShouldContainSubstring, `"error_message":"error"`)
 					So(timeout, ShouldBeNil)
 					msg, timeout = waitMsg(completed)
 					So(msg, ShouldBeNil)
